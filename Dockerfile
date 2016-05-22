@@ -20,7 +20,7 @@ VOLUME ["/usr/local/kbengine/assets"]
 EXPOSE 20013
 EXPOSE 20015
 
-CMD cd /usr/local/kbengine/assets && ./../scripts/start_server.sh && tail
+ENTRYPOINT cd /usr/local/kbengine/assets/ && ./../scripts/start_server.sh && tail
 
 
 
