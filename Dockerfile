@@ -7,7 +7,7 @@ RUN apt-get update
 RUN apt-get install -y git make gcc g++ libmysqlclient-dev libssl-dev python
 
 # 获取KBEngine和编译
-RUN cd /usr/local/ && git clone https://git.oschina.net/likecg/kbengine.git
+RUN cd /usr/local/ && git clone https://github.com/kbengine/kbengine.git
 RUN chmod -R 755 /usr/local/kbengine && cd /usr/local/kbengine/kbe/src && make
 
 # 复制出脚本
