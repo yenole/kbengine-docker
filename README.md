@@ -19,8 +19,11 @@ docker build -t yenole/kbengine .
 
 ## 运行服务器
 ```
-# 后台运行
+# 新建容器
 docker run -d --kbe --link mysql:db -p 20013:20013 -p 20015:20015 -v /var/kbe/assets:/usr/local/kbengine/assets kbengine
+
+# 运行已有的容器
+docker start kbe
 
 # 关闭
 docker exec -it kbe /bin/bash
