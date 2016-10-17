@@ -2,15 +2,17 @@ FROM ubuntu
 
 MAINTAINER yenole <Netxy@vip.qq.com>
 
+# 替换阿里源
+RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak
+ADD sources.list /etc/apt/sources.list
+
 # 更新并安装环境
 RUN apt-get update
-RUN apt-get install -y git make gcc g++ libmysqlclient-dev libssl-dev python
+RUN apt-get install -y make gcc g++ libmysqlclient-dev libssl-dev python unzip
 
-# 获取KBEngine和编译
-RUN cd /usr/local/ && git clone https://github.com/kbengine/kbengine.git
-# 国内镜像
-# RUN cd /usr/local/ && git clone https://git.oschina.net/likecg/kbengine.git
-RUN chmod -R 755 /usr/local/kbengine && cd /usr/local/kbengine/kbe/src && make
+# 导入KBEngine和编译
+ADD KBEngine.zip /usr/local/KBEngine.zip
+RUN unzip /usr/local/KBEngine.zip -d /usr/local && chmod -R 755 /usr/local/kbengine && cd /usr/local/kbengine/kbe/src && make
 
 # 复制出脚本
 RUN mkdir /usr/local/kbengine/scripts && cp -R /usr/local/kbengine/assets/*.sh /usr/local/kbengine/scripts
