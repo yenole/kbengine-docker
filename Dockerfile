@@ -8,23 +8,16 @@ ADD sources.list /etc/apt/sources.list
 
 # 更新并安装环境
 RUN apt-get update
-RUN apt-get install -y make gcc g++ libmysqlclient-dev libssl-dev python unzip
-
-# 导入KBEngine和编译
-ADD KBEngine.zip /usr/local/KBEngine.zip
-RUN unzip /usr/local/KBEngine.zip -d /usr/local && chmod -R 755 /usr/local/kbengine && cd /usr/local/kbengine/kbe/src && make
-
-# 复制出脚本
-RUN mkdir /usr/local/kbengine/scripts && cp -R /usr/local/kbengine/assets/*.sh /usr/local/kbengine/scripts
+RUN apt-get install -y libmysqlclient-dev libssl-dev python
 
 # 服务器脚本和资源挂载目录
-VOLUME ["/usr/local/kbengine/assets"]
+VOLUME ["/var/lib/kbengine/assets","/var/lib/kbengine/kbe"]
 
 # 映射端口
 EXPOSE 20013
 EXPOSE 20015
 
-ENTRYPOINT cd /usr/local/kbengine/assets/ && ./../scripts/start_server.sh && tail -f
+ENTRYPOINT cd /var/lib/kbengine/assets/ && ./scripts/start_server.sh && tail -f
 
 
 
