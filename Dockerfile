@@ -10,6 +10,11 @@ ADD sources.list /etc/apt/sources.list
 RUN apt-get update
 RUN apt-get install -y libmysqlclient-dev libssl-dev python
 
+# 环境变量
+ENV KBE_ROOT /var/lib/kbengine
+ENV KBE_RES_PATH $KBE_ROOT/kbe/res/:$KBE_ROOT/assets:$KBE_ROOT/assets/res/:$KBE_ROOT/assets/scripts/
+ENV KBE_BIN_PATH $KBE_ROOT/kbe/bin/server/
+
 # 服务器脚本和资源挂载目录
 VOLUME ["/var/lib/kbengine/assets","/var/lib/kbengine/kbe"]
 
@@ -17,7 +22,12 @@ VOLUME ["/var/lib/kbengine/assets","/var/lib/kbengine/kbe"]
 EXPOSE 20013
 EXPOSE 20015
 
-ENTRYPOINT cd /var/lib/kbengine/assets/ && ./scripts/start_server.sh && tail -f
+# 添加脚本
+ADD start.sh /start.sh
+# 添加执行权限
+RUN chmod 777 /start.sh
+
+CMD /start.sh
 
 
 
