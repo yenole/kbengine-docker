@@ -9,9 +9,9 @@
 ## 构建镜像
 
 ```
-git clone https://github.com/itspas/kbengine_docker.git
+git clone https://github.com/yenole/kbengine-docker.git
 
-cd kbengine_docker
+cd kbengine-docker
 
 docker build -t yenole/kbengine .
 
@@ -20,19 +20,17 @@ docker build -t yenole/kbengine .
 ## 运行服务器
 ```
 # 新建容器
-docker run -d --kbe --link mysql:db -p 20013:20013 -p 20015:20015 -v /var/kbe/assets:/usr/local/kbengine/assets kbengine
 
 # 运行已有的容器
-docker start kbe
 
 # 关闭
 docker exec -it kbe /bin/bash
-cd /usr/local/kbengine/assets/ && ./../scripts/safa_kill.sh && exit
+cd /var/lib/kbengine/assets/ && ./safa_kill.sh && exit
 docker stop kbe
 
 # 重启
 docker exec -it kbe /bin/bash
-cd /usr/local/kbengine/assets/ && ./../scripts/safa_kill.sh && ./../scripts/start_server.s
+cd /var/lib/kbengine/assets/ && ./safa_kill.sh && ./start_server.sh
 ```
 
 ## 注意
