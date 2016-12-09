@@ -3,8 +3,8 @@ FROM ubuntu
 MAINTAINER yenole <Netxy@vip.qq.com>
 
 # 替换阿里源
-RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak
-ADD sources.list /etc/apt/sources.list
+# RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak
+# ADD sources.list /etc/apt/sources.list
 
 # 更新并安装环境
 RUN apt-get update
