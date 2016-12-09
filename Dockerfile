@@ -8,7 +8,7 @@ ADD sources.list /etc/apt/sources.list
 
 # 更新并安装环境
 RUN apt-get update
-RUN apt-get install -y libmysqlclient-dev libssl-dev python
+RUN apt-get install -y libmysqlclient-dev libssl-dev python telnet
 
 # 环境变量
 ENV KBE_ROOT /var/lib/kbengine
