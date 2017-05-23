@@ -1,10 +1,9 @@
-FROM ubuntu
+FROM daocloud.io/library/ubuntu
 
 MAINTAINER yenole <Netxy@vip.qq.com>
 
 # 替换阿里源
-# RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak
-# ADD sources.list /etc/apt/sources.list
+ADD sources.list /etc/apt/sources.list
 
 # 更新并安装环境
 RUN apt-get update
@@ -12,6 +11,7 @@ RUN apt-get install -y libmysqlclient20 telnet
 
 # 环境变量
 ENV KBE_DT 10s
+ENV KBE_LOGIN_NUM 1
 ENV KBE_ROOT /var/lib/kbengine
 ENV KBE_RES_PATH $KBE_ROOT/kbe/res/:$KBE_ROOT/assets:$KBE_ROOT/assets/res/:$KBE_ROOT/assets/scripts/
 ENV KBE_BIN_PATH $KBE_ROOT/kbe/bin/server/
